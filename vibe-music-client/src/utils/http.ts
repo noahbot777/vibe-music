@@ -69,16 +69,23 @@ instance.interceptors.response.use(
     if (error.response) {
       switch (error.response.status) {
         case 401:
-          // 如果不是登录请求，则清除用户信息
+          // 清除本地存储的 token
+          localStorage.removeItem('token')
+          const userStore = UserStore()
+          userStore.clearUserInfo()
+          
+          // 如果不是登录请求，提示重新登录
           if (!error.config.url?.includes('/user/login')) {
-            const userStore = UserStore()
-            userStore.clearUserInfo()
             ElMessage.error('登录已过期，请重新登录')
           } else {
             ElMessage.error('邮箱或密码错误')
           }
           break
         case 403:
+          // 清除本地存储的 token
+          localStorage.removeItem('token')
+          const userStore403 = UserStore()
+          userStore403.clearUserInfo()
           ElMessage.error('没有权限')
           break
         case 404:
