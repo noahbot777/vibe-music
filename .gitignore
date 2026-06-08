@@ -1,0 +1,80 @@
+# =====================
+# 项目日志文件
+# =====================
+*.log
+backend.log
+backend_verbose.log
+
+# =====================
+# MinIO 数据与运行文件
+# =====================
+minio/
+minio/data/
+minio/bin/
+.minio.sys/
+
+# =====================
+# 大体积媒体/压缩包
+# =====================
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+*.mp3
+*.wav
+*.flac
+*.ogg
+*.mp4
+*.avi
+*.mov
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.webp
+
+# =====================
+# IDE/编辑器配置
+# =====================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# =====================
+# 前端项目（vibe-music-client / admin）通用忽略
+# =====================
+node_modules/
+dist/
+build/
+.npm
+.cache/
+.parcel-cache/
+.vite/
+.env
+.env.local
+.env.*.local
+
+# =====================
+# 后端项目（vibe-music-server）通用忽略
+# =====================
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.iml
+.gradle/
+build/
+*.ipr
+*.iws
+*.out
+application*.yml
+application*.properties
+!application.yml.example
+!application.properties.example
