@@ -7,9 +7,9 @@ import {
   routerArrays,
   storageLocal
 } from "../utils";
-import { type LoginResult, getLogin } from "@/api/user";
+import { type LoginResult, type RefreshTokenResult, getLogin, refreshTokenApi } from "@/api/user";
 import { useMultiTagsStoreHook } from "./multiTags";
-import { type DataInfo, removeToken, userKey } from "@/utils/auth";
+import { type DataInfo, removeToken, setToken, userKey } from "@/utils/auth";
 import { getLogout } from "@/api/user";
 
 export const useUserStore = defineStore({
@@ -82,22 +82,22 @@ export const useUserStore = defineStore({
       useMultiTagsStoreHook().handleTags("equal", [...routerArrays]);
       resetRouter();
       router.push("/login");
-    }
+    },
     /** 刷新`token` */
-    // async handRefreshToken(data) {
-    //   return new Promise<RefreshTokenResult>((resolve, reject) => {
-    //     refreshTokenApi(data)
-    //       .then(data => {
-    //         if (data) {
-    //           setToken(data.data);
-    //           resolve(data);
-    //         }
-    //       })
-    //       .catch(error => {
-    //         reject(error);
-    //       });
-    //   });
-    // }
+    async handRefreshToken(data) {
+      return new Promise<RefreshTokenResult>((resolve, reject) => {
+        refreshTokenApi(data)
+          .then(data => {
+            if (data) {
+              setToken(data.data);
+              resolve(data);
+            }
+          })
+          .catch(error => {
+            reject(error);
+          });
+      });
+    }
   }
 });
 

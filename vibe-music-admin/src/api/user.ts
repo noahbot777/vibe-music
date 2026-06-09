@@ -82,6 +82,6 @@ export const getLogout = () => {
 };
 
 /** 刷新`token` */
-// export const refreshTokenApi = (data?: object) => {
-//   return http.request<RefreshTokenResult>("post", "/refresh-token", { data });
-// };
+export const refreshTokenApi = (data?: object) => {
+  return http.request<RefreshTokenResult>("post", "/refresh-token", { data });
+};
