@@ -25,7 +25,7 @@ export type ResultTable = {
 /** 用户管理-获取用户列表 */
 export const getUserList = (data: object) => {
   const userData = getToken();
-  return http.request<ResultTable>("post", "/admin/getAllUsers", {
+  return http.request<ResultTable>("post", "/api/admin/getAllUsers", {
     headers: {
       "Content-Type": "application/json",
       Authorization: userData.accessToken
@@ -37,7 +37,7 @@ export const getUserList = (data: object) => {
 /** 用户管理-新增用户 */
 export const addUser = (data: object) => {
   const userData = getToken();
-  return http.request<Result>("post", "/admin/addUser", {
+  return http.request<Result>("post", "/api/admin/addUser", {
     headers: {
       "Content-Type": "application/json",
       Authorization: userData.accessToken
@@ -49,7 +49,7 @@ export const addUser = (data: object) => {
 /** 用户管理-编辑用户 */
 export const updateUser = (data: object) => {
   const userData = getToken();
-  return http.request<Result>("put", "/admin/updateUser", {
+  return http.request<Result>("put", "/api/admin/updateUser", {
     headers: {
       "Content-Type": "application/json",
       Authorization: userData.accessToken
@@ -95,7 +95,7 @@ export const deleteUsers = (ids: Array<number>) => {
 /** 歌手管理-获取歌手列表 */
 export const getArtistList = (data: object) => {
   const userData = getToken();
-  return http.request<ResultTable>("post", "/admin/getAllArtists", {
+  return http.request<ResultTable>("post", "/api/admin/getAllArtists", {
     headers: {
       "Content-Type": "application/json",
       Authorization: userData.accessToken
@@ -107,7 +107,7 @@ export const getArtistList = (data: object) => {
 /** 歌手管理-新增歌手 */
 export const addArtist = (data: object) => {
   const userData = getToken();
-  return http.request<Result>("post", "/admin/addArtist", {
+  return http.request<Result>("post", "/api/admin/addArtist", {
     headers: {
       "Content-Type": "application/json",
       Authorization: userData.accessToken
@@ -119,7 +119,7 @@ export const addArtist = (data: object) => {
 /** 歌手管理-编辑歌手 */
 export const updateArtist = (data: object) => {
   const userData = getToken();
-  return http.request<Result>("put", "/admin/updateArtist", {
+  return http.request<Result>("put", "/api/admin/updateArtist", {
     headers: {
       "Content-Type": "application/json",
       Authorization: userData.accessToken
@@ -164,7 +164,7 @@ export const deleteArtists = (ids: Array<number>) => {
 /** 歌曲管理-获取所有歌手 */
 export const getAllArtists = () => {
   const userData = getToken();
-  return http.request<Result>("get", "/admin/getAllArtistNames", {
+  return http.request<Result>("get", "/api/admin/getAllArtistNames", {
     headers: {
       "Content-Type": "application/json",
       Authorization: userData.accessToken
@@ -175,7 +175,7 @@ export const getAllArtists = () => {
 /** 歌曲管理-获取歌曲列表 */
 export const getSongList = (data: object) => {
   const userData = getToken();
-  return http.request<ResultTable>("post", "/admin/getAllSongsByArtist", {
+  return http.request<ResultTable>("post", "/api/admin/getAllSongsByArtist", {
     headers: {
       "Content-Type": "application/json",
       Authorization: userData.accessToken
@@ -187,7 +187,7 @@ export const getSongList = (data: object) => {
 /** 歌曲管理-新增歌曲 */
 export const addSong = (data: object) => {
   const userData = getToken();
-  return http.request<Result>("post", "/admin/addSong", {
+  return http.request<Result>("post", "/api/admin/addSong", {
     headers: {
       "Content-Type": "application/json",
       Authorization: userData.accessToken
@@ -199,7 +199,7 @@ export const addSong = (data: object) => {
 /** 歌曲管理-编辑歌曲 */
 export const updateSong = (data: object) => {
   const userData = getToken();
-  return http.request<Result>("put", "/admin/updateSong", {
+  return http.request<Result>("put", "/api/admin/updateSong", {
     headers: {
       "Content-Type": "application/json",
       Authorization: userData.accessToken
@@ -257,7 +257,7 @@ export const deleteSongs = (ids: Array<number>) => {
 /** 歌单管理-获取歌单列表 */
 export const getPlaylistList = (data: object) => {
   const userData = getToken();
-  return http.request<ResultTable>("post", "/admin/getAllPlaylists", {
+  return http.request<ResultTable>("post", "/api/admin/getAllPlaylists", {
     headers: {
       "Content-Type": "application/json",
       Authorization: userData.accessToken
@@ -269,7 +269,7 @@ export const getPlaylistList = (data: object) => {
 /** 歌单管理-新增歌单 */
 export const addPlaylist = (data: object) => {
   const userData = getToken();
-  return http.request<Result>("post", "/admin/addPlaylist", {
+  return http.request<Result>("post", "/api/admin/addPlaylist", {
     headers: {
       "Content-Type": "application/json",
       Authorization: userData.accessToken
@@ -281,7 +281,7 @@ export const addPlaylist = (data: object) => {
 /** 歌单管理-编辑歌单 */
 export const updatePlaylist = (data: object) => {
   const userData = getToken();
-  return http.request<Result>("put", "/admin/updatePlaylist", {
+  return http.request<Result>("put", "/api/admin/updatePlaylist", {
     headers: {
       "Content-Type": "application/json",
       Authorization: userData.accessToken
@@ -326,7 +326,7 @@ export const deletePlaylists = (ids: Array<number>) => {
 /** 反馈管理-获取反馈列表 */
 export const getFeedbackList = (data: object) => {
   const userData = getToken();
-  return http.request<ResultTable>("post", "/admin/getAllFeedbacks", {
+  return http.request<ResultTable>("post", "/api/admin/getAllFeedbacks", {
     headers: {
       "Content-Type": "application/json",
       Authorization: userData.accessToken
@@ -358,7 +358,7 @@ export const deleteFeedbacks = (ids: Array<number>) => {
 /** 轮播图管理-获取轮播图列表 */
 export const getBannerList = (data: object) => {
   const userData = getToken();
-  return http.request<ResultTable>("post", "/admin/getAllBanners", {
+  return http.request<ResultTable>("post", "/api/admin/getAllBanners", {
     headers: {
       "Content-Type": "application/json",
       Authorization: userData.accessToken
@@ -370,7 +370,7 @@ export const getBannerList = (data: object) => {
 /** 轮播图管理-新增轮播图 */
 export const addBanner = (data: object) => {
   const userData = getToken();
-  return http.request<Result>("post", "/admin/addBanner", {
+  return http.request<Result>("post", "/api/admin/addBanner", {
     headers: {
       "Content-Type": "multipart/form-data",
       Authorization: userData.accessToken

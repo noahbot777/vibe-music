@@ -5,7 +5,7 @@ import { getToken } from "@/utils/auth";
 /** 获取用户数量 */
 export const getAllUsersCount = () => {
   const userData = getToken();
-  return http.request<Result>("get", "/admin/getAllUsersCount", {
+  return http.request<Result>("get", "/api/admin/getAllUsersCount", {
     headers: {
       "Content-Type": "application/json",
       Authorization: userData.accessToken
@@ -16,7 +16,7 @@ export const getAllUsersCount = () => {
 /** 获取歌手数量 */
 export const getAllArtistsCount = (gender?: number, area?: string) => {
   const userData = getToken();
-  return http.request<Result>("get", "/admin/getAllArtistsCount", {
+  return http.request<Result>("get", "/api/admin/getAllArtistsCount", {
     headers: {
       "Content-Type": "application/json",
       Authorization: userData.accessToken
@@ -28,7 +28,7 @@ export const getAllArtistsCount = (gender?: number, area?: string) => {
 /** 获取歌曲数量 */
 export const getAllSongsCount = (style?: string) => {
   const userData = getToken();
-  return http.request<Result>("get", "/admin/getAllSongsCount", {
+  return http.request<Result>("get", "/api/admin/getAllSongsCount", {
     headers: {
       "Content-Type": "application/json",
       Authorization: userData.accessToken
@@ -40,7 +40,7 @@ export const getAllSongsCount = (style?: string) => {
 /** 获取歌单数量 */
 export const getAllPlaylistsCount = (style?: string) => {
   const userData = getToken();
-  return http.request<Result>("get", "/admin/getAllPlaylistsCount", {
+  return http.request<Result>("get", "/api/admin/getAllPlaylistsCount", {
     headers: {
       "Content-Type": "application/json",
       Authorization: userData.accessToken

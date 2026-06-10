@@ -19,6 +19,8 @@ const defaultConfig: AxiosRequestConfig = {
   baseURL: "", // 使用 Vite 代理
   // 请求超时时间
   timeout: 10000,
+  // 允许携带 Cookie，确保 Token 能被正确发送
+  withCredentials: true,
   headers: {
     Accept: "application/json, text/plain, */*",
     "Content-Type": "application/json",
@@ -58,16 +60,18 @@ class PureHttp {
           return config;
         }
         /** 请求白名单，放置一些不需要`token`的接口（通过设置请求白名单，防止`token`过期后再请求造成的死循环问题） */
-        const whiteList = ["/refresh-token", "/login"];
+        const whiteList = ["/refresh-token", "/login", "/api/admin/login", "/api/user/login"];
         return whiteList.some(url => config.url.endsWith(url))
           ? config
           : new Promise(resolve => {
               const data = getToken();
               if (data) {
                 const now = new Date().getTime();
-                const expired = parseInt(data.expires) - now <= 0;
+                const expiresTime = typeof data.expires === 'number' ? data.expires : new Date(data.expires).getTime();
+                const expired = expiresTime - now <= 0;
                 if (expired) {
                   // token过期，直接跳转到登录页
+                  console.warn("Token expired, redirecting to login");
                   useUserStoreHook().logOut();
                   resolve(config);
                 } else {
@@ -77,6 +81,7 @@ class PureHttp {
                   resolve(config);
                 }
               } else {
+                console.warn("No token found, request will proceed without Authorization header");
                 resolve(config);
               }
             });

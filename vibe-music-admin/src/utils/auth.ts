@@ -116,18 +116,19 @@ export function getToken(): DataInfo<number> {
 // }
 
 export function setToken(data: DataInfo<Date>) {
-  let expires = 0;
   const { accessToken, refreshToken, roles, username } = data;
   const { isRemembered, loginDay } = useUserStoreHook();
-  expires = new Date(data.expires).getTime();
+  
+  // 将 Date 对象转换为时间戳（毫秒）
+  const expires = new Date(data.expires).getTime();
 
   const cookieString = JSON.stringify({ accessToken, expires, refreshToken });
 
-  expires > 0
-    ? Cookies.set(TokenKey, cookieString, {
-        expires: (expires - Date.now()) / 86400000
-      })
-    : Cookies.set(TokenKey, cookieString);
+  // 计算 token 剩余有效期（天数）
+  const expiresInDays = Math.max((expires - Date.now()) / 86400000, 1);
+  Cookies.set(TokenKey, cookieString, {
+    expires: expiresInDays
+  });
 
   Cookies.set(
     multipleTabsKey,
@@ -156,13 +157,13 @@ export function setToken(data: DataInfo<Date>) {
       roles
     });
   } else {
-    const username =
+    const savedUsername =
       storageLocal().getItem<DataInfo<number>>(userKey)?.username ?? "";
-    const roles =
+    const savedRoles =
       storageLocal().getItem<DataInfo<number>>(userKey)?.roles ?? [];
     setUserKey({
-      username,
-      roles
+      username: savedUsername,
+      roles: savedRoles
     });
   }
 }

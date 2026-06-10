@@ -49,13 +49,16 @@ import { jwtDecode } from "jwt-decode";
 import { setToken, type DataInfo, getToken } from "@/utils/auth";
 
 export const getLogin = async (data?: object) => {
-  const response = await http.request<LoginResult>("post", "/admin/login", {
+  const response = await http.request<LoginResult>("post", "/api/admin/login", {
     data
   });
 
   if (response.data) {
     const decodedToken: any = jwtDecode(response.data); // 解码 JWT
-    const { role, username } = decodedToken.claims; // 提取用户信息
+    // JWT payload 中的 claims 包含用户信息
+    const claims = decodedToken.claims || {};
+    const role = claims.role || "ROLE_USER";
+    const username = claims.username || "";
     const expires = new Date(decodedToken.exp * 1000); // 将时间戳转换为 Date 对象
 
     // 构建新的数据结构
@@ -76,7 +79,7 @@ export const getLogin = async (data?: object) => {
 /** 登出 */
 export const getLogout = () => {
   const userData = getToken(); // 获取 token 数据
-  return http.request("post", "/admin/logout", {
+  return http.request("post", "/api/admin/logout", {
     headers: { Authorization: userData.accessToken } // 设置请求头
   });
 };

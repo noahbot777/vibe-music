@@ -12,6 +12,7 @@ import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 import { ref, reactive, toRaw, onMounted, onBeforeUnmount } from "vue";
 import { useDataThemeChange } from "@/layout/hooks/useDataThemeChange";
 import { addPathMatch, getTopMenu } from "@/router/utils";
+import { constantMenus } from "@/router/index";
 import { usePermissionStoreHook } from "@/store/modules/permission";
 
 import dayIcon from "@/assets/svg/day.svg?component";
@@ -50,10 +51,11 @@ const onLogin = async (formEl: FormInstance | undefined) => {
         })
         .then(res => {
           if (res.code === 0) {
-            usePermissionStoreHook().handleWholeMenus([]);
+            // 设置静态菜单
+            usePermissionStoreHook().handleWholeMenus(constantMenus);
             addPathMatch();
-            // 获取后端路由
-            router.push(getTopMenu(true).path).then(() => {
+            // 跳转到首页
+            router.push("/welcome").then(() => {
               message("登录成功", { type: "success" });
             });
           } else {
