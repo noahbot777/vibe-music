@@ -5,7 +5,7 @@ import { getToken } from "@/utils/auth";
 /** 获取用户数量 */
 export const getAllUsersCount = () => {
   const userData = getToken();
-  return http.request<Result>("get", "/api/admin/getAllUsersCount", {
+  return http.request<Result>("get", "/admin/getAllUsersCount", {
     headers: {
       "Content-Type": "application/json",
       Authorization: userData.accessToken
